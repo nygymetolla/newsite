@@ -1,0 +1,326 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f7ff">
+  <title>Вход в аккаунт</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      font-family: Inter, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      color: #172033;
+      background:
+        radial-gradient(ellipse at 15% 15%, #dce7ff 0, transparent 42%),
+        radial-gradient(ellipse at 85% 85%, #e7dcff 0, transparent 40%),
+        #f7f8fc;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 410px;
+      padding: 42px 36px 36px;
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      border-radius: 24px;
+      box-shadow: 0 24px 70px rgba(40, 55, 100, 0.12);
+      backdrop-filter: blur(16px);
+      animation: appear 0.5s ease both;
+    }
+
+    .logo {
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 26px;
+      color: white;
+      font-size: 25px;
+      font-weight: 700;
+      border-radius: 17px;
+      background: linear-gradient(135deg, #4776f5, #7654e8);
+      box-shadow: 0 8px 20px rgba(85, 103, 232, 0.25);
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 29px;
+      font-weight: 700;
+      letter-spacing: -0.8px;
+    }
+
+    .subtitle {
+      margin-top: 10px;
+      margin-bottom: 32px;
+      text-align: center;
+      color: #81899c;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .field {
+      margin-bottom: 21px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 9px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #39445a;
+    }
+
+    .input-wrap {
+      position: relative;
+    }
+
+    input {
+      width: 100%;
+      height: 52px;
+      padding: 0 15px;
+      border: 1px solid #e0e5ef;
+      border-radius: 11px;
+      outline: none;
+      background: #fff;
+      color: #172033;
+      font: inherit;
+      font-size: 14px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input::placeholder {
+      color: #aab1c0;
+    }
+
+    input:focus {
+      border-color: #6686f4;
+      box-shadow: 0 0 0 4px rgba(91, 119, 244, 0.11);
+    }
+
+    .password-input {
+      padding-right: 49px;
+    }
+
+    .toggle-password {
+      position: absolute;
+      top: 50%;
+      right: 13px;
+      transform: translateY(-50%);
+      border: 0;
+      background: transparent;
+      color: #8790a4;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .submit {
+      width: 100%;
+      height: 53px;
+      margin-top: 8px;
+      border: 0;
+      border-radius: 11px;
+      background: linear-gradient(110deg, #4776f5, #6558e8);
+      color: white;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(79, 101, 232, 0.2);
+      transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+    }
+
+    .submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(79, 101, 232, 0.27);
+    }
+
+    .submit:active {
+      transform: translateY(0);
+    }
+
+    .submit:disabled {
+      opacity: 0.65;
+      cursor: wait;
+    }
+
+    .message {
+      display: none;
+      margin-top: 18px;
+      padding: 12px;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .message.show {
+      display: block;
+    }
+
+    .message.success {
+      background: #eaf8ef;
+      color: #187543;
+    }
+
+    .message.error {
+      background: #fff0f0;
+      color: #b42332;
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 34px 24px 28px;
+        border-radius: 20px;
+      }
+
+      h1 {
+        font-size: 26px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="card">
+    <div class="logo" aria-hidden="true">N</div>
+
+    <h1>С возвращением</h1>
+    <p class="subtitle">Войдите в свой аккаунт</p>
+
+    <form id="loginForm">
+      <div class="field">
+        <label for="login">Логин</label>
+        <input
+          id="login"
+          name="login"
+          type="text"
+          placeholder="Введите логин"
+          autocomplete="off"
+          maxlength="50"
+          required
+        >
+      </div>
+
+      <div class="field">
+        <label for="password">Пароль</label>
+        <div class="input-wrap">
+          <input
+            id="password"
+            name="password"
+            type="password"
+            class="password-input"
+            placeholder="Введите пароль"
+            autocomplete="off"
+            maxlength="50"
+            required
+          >
+          <button
+            class="toggle-password"
+            type="button"
+            id="togglePassword"
+            aria-label="Показать пароль"
+          >Показать</button>
+        </div>
+      </div>
+
+      <button class="submit" id="submitButton" type="submit">
+        Войти
+      </button>
+
+      <div class="message" id="message" role="status"></div>
+    </form>
+  </main>
+
+  <script>
+    // Вставь сюда адрес своего Google Apps Script.
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzblcV9tx6A1PcNp6apuI5BqMlJ9tZtfPVa2y-gX7bogZOxwrIirQ6Bk2eE9YdXAkpCYw/exec";
+
+    const form = document.getElementById("loginForm");
+    const password = document.getElementById("password");
+    const toggle = document.getElementById("togglePassword");
+    const button = document.getElementById("submitButton");
+    const message = document.getElementById("message");
+
+    toggle.addEventListener("click", () => {
+      const hidden = password.type === "password";
+      password.type = hidden ? "text" : "password";
+      toggle.textContent = hidden ? "Скрыть" : "Показать";
+      toggle.setAttribute(
+        "aria-label",
+        hidden ? "Скрыть пароль" : "Показать пароль"
+      );
+    });
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      if (
+        !SCRIPT_URL.startsWith("https://script.google.com/") ||
+        !SCRIPT_URL.endsWith("/exec")
+      ) {
+        showMessage("Сначала укажи адрес приложения.", "error");
+        return;
+      }
+
+      button.disabled = true;
+      button.textContent = "Выполняется вход...";
+      message.className = "message";
+
+      try {
+        const data = new URLSearchParams(new FormData(form));
+
+        await fetch(SCRIPT_URL, {
+          method: "POST",
+          body: data,
+          mode: "no-cors"
+        });
+
+        showMessage(
+          "Запрос отправлен. Проверь таблицу, чтобы убедиться, что запись добавлена.",
+          "success"
+        );
+
+        form.reset();
+        password.type = "password";
+        toggle.textContent = "Показать";
+      } catch (error) {
+        showMessage(
+          "Не удалось отправить запрос. Проверь подключение к интернету.",
+          "error"
+        );
+      } finally {
+        button.disabled = false;
+        button.textContent = "Войти";
+      }
+    });
+
+    function showMessage(text, type) {
+      message.textContent = text;
+      message.className = "message show " + type;
+    }
+  </script>
+</body>
+</html>
